@@ -1,0 +1,38 @@
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// Menyimpan waktu saat server mulai dijalankan
+const serverStartTime = new Date().toLocaleString('id-ID', {
+timeZone: 'Asia/Jakarta'
+});
+
+// a. Route / -> Menampilkan teks sambutan
+app.get('/', (req, res) => {
+res.send('Selamat datang di server kelompok ketua Tengku');
+});
+
+// b. Route /info -> Menampilkan pesan waktu server dijalankan
+app.get('/info', (req, res) => {
+res.send(Server ini mulai dijalankan pada: ${serverStartTime});
+});
+
+// c. Route /anggota -> Menampilkan data JSON berisi nama anggota kelompok
+app.get('/anggota', (req, res) => {
+const dataAnggota = {
+kelompok: 'server kelompok ketua Tengku',
+total_anggota: 4,
+anggota: [
+{ id: 1, nama: 'Rajbi' },
+{ id: 2, nama: 'Tengku' },
+{ id: 3, nama: 'Aldi' },
+{ id: 4, nama: 'Norma' }
+]
+};
+res.json(dataAnggota);
+});
+
+// Menjalankan server
+app.listen(PORT, () => {
+console.log(Server berjalan di http://localhost:${PORT});
+});
